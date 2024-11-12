@@ -9,7 +9,6 @@ import os
 import pytesseract
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
-openai.api_key = "sk-proj-vkyP4ewffTxCaV2HeYqlT3BlbkFJoApzthkmRIvPFyjtRf8H"
 
 
 def extract_text_from_pptx(file_path, image_output_dir="images"):
