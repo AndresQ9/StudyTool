@@ -53,9 +53,9 @@ def extract_text_from_pptx(file_path, image_output_dir="images"):
 
 
 # Example usage:
-file_path = r"COP 4331 - Gathering Requirements.pptx"  # Replace with your file path
+file_path = r"COP 4331 - Gathering Requirements.pptx" 
 text_data = extract_text_from_pptx(file_path)
-print(text_data)  # This will print the text extracted from each slide
+print(text_data)
 
 # Load a pre-trained summarization model
 summarizer = pipeline("summarization", model="t5-small")
@@ -129,38 +129,11 @@ def generate_quiz_questions(text_data, max_length=50):
     questions = generated_text.split("\n")
 
     return questions
-'''
-def generate_quiz_questions(text_data, max_length=10000):
-    """
-    Generates quiz questions based on the entire summarized text content.
 
-    Args:
-        text_data (str): The entire summarized text content of the slides.
-        max_length (int): The maximum length for generated questions.
-
-    Returns:
-        List[str]: Quiz questions generated from the summarized text.
-    """
-    # Initialize the GPT-2 model and text generation pipeline
-    generator = pipeline("text-generation", model="gpt2")
-
-    # Combine all the summarized text into a single string
-    combined_text = " ".join(text_data)
-
-    # Generate quiz questions based on the combined summarized text
-    prompt = f"Generate quiz questions from the following summarized content:\n\n{combined_text}"
-
-    # Generate text (quiz questions) using GPT-2
-    questions = generator(prompt, max_length=max_length, num_return_sequences=1)
-
-    # Return the generated quiz questions
-    return [questions[0]['generated_text']]
-
-'''
 
 # Example usage:
 summaries = summarize_slides(text_data)
-print(summaries)  # This will print the summaries for each slide
+print(summaries)
 
 # Generate quiz questions from summaries
 quiz_questions = generate_quiz_questions(summaries)
