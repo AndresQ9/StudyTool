@@ -2,6 +2,8 @@ const pptxParser = require('pptx-parser');
 const Tesseract = require('tesseract.js');
 const axios = require('axios');
 const fs = require('fs');
+const OpenAI = require('openai');
+const openai = new OpenAI(process.env.OPENAI_API_KEY);
 
 async function extractTextFromPPTX(filePath, imageOutputDir = 'images') {
   const pptx = await pptxParser.parse(filePath);
@@ -61,6 +63,16 @@ async function summarizeSlides(textData, maxLength = 40) {
   }
   return summaries;
 }
+
+const prompt = "Based on the following summarized content, generate a list of quiz questions:\n\n{combined_text}\n\n Please make the questions varied and engaging, and ensure they are suitable for a quiz.";
+openai.Completion.create({
+  engine: 'gpt-3.5-turbo',
+  prompt: prompt,
+  }).then(response => {
+  console.log(response.choices[0].text.trim());
+  }).catch(error => {
+  console.error(error);
+});
 
 // Example usage
 (async () => {
