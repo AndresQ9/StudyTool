@@ -64,15 +64,33 @@ async function summarizeSlides(textData, maxLength = 40) {
   return summaries;
 }
 
-const prompt = "Based on the following summarized content, generate a list of quiz questions:\n\n{combined_text}\n\n Please make the questions varied and engaging, and ensure they are suitable for a quiz.";
-openai.Completion.create({
-  engine: 'gpt-3.5-turbo',
-  prompt: prompt,
-  }).then(response => {
-  console.log(response.choices[0].text.trim());
-  }).catch(error => {
-  console.error(error);
-});
+async function generateQuizQuestions(textData, maxLength = 50) {
+  // Create the string of summarized data
+  const combinedText = textData.join(" ");
+
+  const messages = [
+    { role: "system", content: "You are a helpful assistant." },
+    { role: "user", content: `Based on the following summarized content, generate a list of quiz questions:\n\n${combinedText}\n\nPlease make the questions varied and engaging, and ensure they are suitable for a quiz.` }
+  ];
+
+  try {
+    // Prompt the model to create the quiz
+    const response = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: messages,
+      max_tokens: 1000,
+      temperature: 0.7 
+    });
+
+    const generatedText = response.data.choices[0].message.content.trim();
+    const questions = generatedText.split("\n").filter(q => q.trim() !== "");
+
+    console.log(questions);
+    return questions;
+  } catch (error) {
+    console.error("Error generating quiz questions:", error);
+  }
+}
 
 // Example usage
 (async () => {
@@ -82,4 +100,7 @@ openai.Completion.create({
 
   const summaries = await summarizeSlides(textData);
   console.log(summaries);
+
+  const quiz = await generateQuizQuestions(summaries);
+  console.log(quiz);
 })();
