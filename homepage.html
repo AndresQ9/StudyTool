@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+        }
+        .side-bar{
+            width: 250px;
+            height: 100vh;
+            background-color: #3b689b;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-top: 30px;
+            overflow: visible;
+        }
+        .side-bar-header{
+            color:white;
+            font-size: 26px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        #first-link{
+            color:white;
+            background-color: #3b689b;
+
+        }
+        .side-bar-links{
+            margin-bottom: 40px;
+            color:#000000;
+            font-size: 16pt;
+            padding-left: 40px;
+            text-align: left;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .side-bar-links:hover{
+            color:black;
+            background-color: #4178b6;
+        }
+        .side-bar-logout{
+            margin-top: 300px;
+            margin-bottom: 40px;
+            color:#000000;
+            font-size: 16pt;
+            padding-left: 40px;
+            text-align: left;
+            text-decoration: none;
+        }
+        .divider{
+            display:block;
+            width: 80%;
+            height: 1px;
+            background-color: transparent;
+            border-top: 1px solid #ffffff;
+            padding: 5px;
+            margin: 50px auto;
+        }
+        .right-container{
+            width: calc(100% - 200px);
+            height: 100vh;
+            margin-left: 250px;
+            padding: 50px;
+            background-color: #ffffff;
+
+        }
+        .container-heading{
+            font-size: 24pt;
+            color: #000000;
+            margin-top: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="side-bar">
+        <div class="side-bar-header">Website Name</div>
+        <div class="divider"></div>
+        <a href="homepage.html" class="side-bar-links" id ="first-link" target="_self">Home</a>
+        <a href="homepage.html" class="side-bar-links" target="_self">Upload</a>
+        <a href="homepage.html" class="side-bar-links" target="_self">My Acccount</a>
+        <a href="homepage.html" class="side-bar-logout" target="_self">Log out</a>
+    </div>
+    <div class="right-container">
+        <h1 class="container-heading">Home Page</h1>
+        <p>Welcome back, User!</p>
+    </div>
+</body>
+</html>
